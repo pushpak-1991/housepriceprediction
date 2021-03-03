@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+!pip install sklearn#import ML library
+csv_import=pd.read_csv("HousePrices.csv")# import csv file from the file directory
+csv_import
+csv_import.isnull().sum()#check for th null values
+a=csv_import.columns[csv_import.isnull().any()]
+csv_import[a].isnull().sum()
+# to view all the null values in the data
+csv_import.info()
+x=property_data[['LotArea','YearBuilt','OverallQual','OverallCond','BedroomAbvGr','KitchenAbvGr','LowQualFinSF','BsmtFinSF2','GarageCars','GarageArea','YrSold','PoolArea','FullBath','TotalBsmtSF','GrLivArea','ScreenPorch','HalfBath','BsmtFullBath','2ndFlrSF']]#independent
+y=property_data['Property_Sale_Price']#dependent(output)
+print(x)
+print(y)
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(x,y)
+model.score(x,y)
+model.predict([[9874,1986,9,10,4,2,110,310,1,387,2000,0,2,999,1374,100,0,2,1000]])
+#train test split method
+from sklearn.model_selection import train_test_split#import
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.25,random_state=0)
+model.fit(x_train,y_train)
+from sklearn.linear_model import LinearRegression
+lin_reg_mod=LinearRegression()
+lin_reg_mod.fit(x_train,y_train)
+pred=lin_reg_mod.predict(x_test)
+import numpy as np
+from sklearn import metrics
+test_set_r2=metrics.r2_score(y_test,pred)
+print(test_set_r2)
+lin_reg_mod.predict([[9874,1986,9,10,4,2,110,310,1,387,2000,0,2,999,1374,100,0,2,1000]])
